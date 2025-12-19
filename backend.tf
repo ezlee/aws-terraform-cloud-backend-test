@@ -1,8 +1,7 @@
 terraform {
 
-  backend "remote" {
+  cloud {
     organization = "ezlee"
-
     workspaces {
       name = "aws-terraform-cloud-backend-test"
     }
