@@ -15,11 +15,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-variable "ip_whitelist" {
-  type        = string
-  description = "IP addresses for whitelist, format: x.x.x.x/y"
-}
-
 # Generate SSH key pair
 resource "tls_private_key" "ec2_key" {
   algorithm = "RSA"
