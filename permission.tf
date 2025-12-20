@@ -18,3 +18,30 @@ resource "aws_iam_group_policy_attachment" "attach_get_secret_policy" {
   group      = data.aws_iam_group.linux_admin_group.id
   policy_arn = aws_iam_policy.allow_get_secret_value.arn
 }
+
+resource "aws_iam_group_policy" "linux_admin_mfa_policy" {
+  group = data.aws_iam_group.linux_admin_group.name
+  name  = "LinuxAdminEnforceMFA"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Sid       = "DenyAllExceptSpecifiedActionsIfNoMFA",
+        Effect    = "Deny",
+        NotAction = [
+          "iam:GetAccountPasswordPolicy",
+          "iam:ChangePassword",
+          "sts:GetSessionToken",
+          "sts:AssumeRole" # Allow assuming roles for MFA setup
+        ],
+        Resource  = "*",
+        Condition = {
+          Bool = {
+            "aws:MultiFactorAuthPresent": "false"
+          }
+        }
+      }
+    ]
+  })
+}
