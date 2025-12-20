@@ -15,7 +15,7 @@ resource "aws_iam_policy" "allow_get_secret_value" {
 }
 
 resource "aws_iam_group_policy_attachment" "attach_get_secret_policy" {
-  group      = data.aws_iam_group.linux_admin_group.id
+  group      = var.iam_group_name
   policy_arn = aws_iam_policy.allow_get_secret_value.arn
 }
 
