@@ -7,3 +7,7 @@ data "aws_subnet" "existing" {
   id = "subnet-06246514a55f3cf12" # 172.31.16.0/20
 }
 
+# Reference the existing Linux-Admin IAM group
+data "aws_iam_group" "linux_admin_group" {
+  group_name = "Linux-Admin" # Ensure this matches the name of your group
+}
