@@ -8,14 +8,10 @@ resource "aws_iam_policy" "allow_get_secret_value" {
       {
         Effect   = "Allow",
         Action   = "secretsmanager:GetSecretValue",
-        Resource = module.ec2_private_key.secret_arn
+        Resource = aws_secretsmanager_secret.ec2_private_key.secret_arn
       }
     ]
   })
-}
-
-data "aws_iam_group" "linux_admin" {
-  group_name = "Linux-Admin"
 }
 
 resource "aws_iam_group_policy_attachment" "attach_get_secret_policy" {
