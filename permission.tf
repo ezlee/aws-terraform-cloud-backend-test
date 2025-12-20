@@ -20,7 +20,7 @@ resource "aws_iam_group_policy_attachment" "attach_get_secret_policy" {
 }
 
 resource "aws_iam_group_policy" "linux_admin_mfa_policy" {
-  group = data.aws_iam_group.linux_admin_group.name
+  group = data.aws_iam_group.linux_admin_group.id
   name  = "LinuxAdminEnforceMFA"
 
   policy = jsonencode({
