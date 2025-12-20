@@ -1,3 +1,7 @@
+locals {
+  iam_group_name = "Linux-Admin"
+}
+
 resource "aws_iam_policy" "allow_get_secret_value" {
   name        = "AllowGetSecretValue"
   description = "Policy to allow GetSecretValue access to the ec2_private_key secret"
@@ -15,16 +19,12 @@ resource "aws_iam_policy" "allow_get_secret_value" {
 }
 
 resource "aws_iam_group_policy_attachment" "attach_get_secret_policy" {
-  group      = var.iam_group_name
+  group      = local.iam_group_name
   policy_arn = aws_iam_policy.allow_get_secret_value.arn
 }
 
-locals {
-  iam_group_name = "Linux-Admin"
-}
-
 resource "aws_iam_group_policy" "linux_admin_mfa_policy" {
-  group = var.iam_group_name
+  group = local.iam_group_name
   name  = "LinuxAdminEnforceMFA"
 
   policy = jsonencode({
