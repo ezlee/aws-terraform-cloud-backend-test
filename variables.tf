@@ -14,8 +14,3 @@ variable "ip_whitelist" {
   type        = string
   description = "IP addresses for whitelist, format: x.x.x.x/y"
 }
-
-variable "iam_group_name" {
-  type        = string
-  description = "Name of the IAM group"
-}
