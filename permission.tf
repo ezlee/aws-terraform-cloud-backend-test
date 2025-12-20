@@ -8,7 +8,7 @@ resource "aws_iam_policy" "allow_get_secret_value" {
       {
         Effect   = "Allow",
         Action   = "secretsmanager:GetSecretValue",
-        Resource = aws_secretsmanager_secret.ec2_private_key.secret_arn
+        Resource = aws_secretsmanager_secret.ec2_private_key.arn
       }
     ]
   })
