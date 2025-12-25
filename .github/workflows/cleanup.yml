@@ -29,7 +29,8 @@ jobs:
       run: |
         IP_WHITELIST_VALUE="${{ secrets.IP_WHITELIST || '203.0.113.1/32' }}"
         echo "ip_whitelist = \"$IP_WHITELIST_VALUE\"" > variables.auto.tfvars
-        cat variables.auto.tfvars
+        echo "aws_access_key_id = \"${{ secrets.AWS_ACCESS_KEY_ID }}\"" >> variables.auto.tfvars
+        echo "aws_secret_access_key = \"${{ secrets.AWS_SECRET_ACCESS_KEY }}\"" >> variables.auto.tfvars
 
     - name: 'Set up Terraform'
       uses: hashicorp/setup-terraform@v1
